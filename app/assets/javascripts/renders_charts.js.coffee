@@ -6,8 +6,8 @@ jQuery ->
       new Highcharts.Chart(data)
 
   addChart = (index, el) ->
-    element = $(el)
+    element = $(this)
     url = element.attr('data-chart')
     jQuery.get(url, processChart(element), 'json')
 
-  jQuery("*[data-chart]").each(addChart)
+  jQuery("*[data-chart]").livequery(addChart)

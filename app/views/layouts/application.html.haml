@@ -19,4 +19,5 @@
                 %li.divider
                 %li= link_to "New project", new_project_path
     #main.container
-      = yield
+      %div{:data => { "pjax-container" => "true" } }
+        = yield
