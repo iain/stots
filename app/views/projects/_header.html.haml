@@ -1,16 +1,17 @@
-- provide :project, project.to_param
+:javascript
+  activateNavigation(#{project.to_param.inspect});
 
 %h1.well
   = project.name
   %small= project.slug
 
 %ul.tabs
-  %li{tab == "overview" ? { :class => "active" } : {} }= link_to "Overview", project
-  %li= link_to "Coverage"
-  %li= link_to "Commits"
-  %li= link_to "Errors"
-  %li= link_to "Builds"
-  %li= link_to "Stats"
-  %li= link_to "Tracker"
-  %li{tab == "rspec" ? { :class => "active" } : {} }= link_to "RSpec", project_rspec_path(project)
-  %li= link_to "Cucumber"
+  %li{active_when(tab == "overview")}= link_to "Overview", project
+  %li{active_when(tab == "rspec")}=    link_to "RSpec",    project_rspec_path(project)
+  %li{active_when(tab == "cucumber")}= link_to "Cucumber", project_cucumber_path(project)
+  %li{active_when(tab == "coverage")}= link_to "Coverage", project
+  %li{active_when(tab == "commits")}=  link_to "Commits",  project
+  %li{active_when(tab == "errors")}=   link_to "Errors",   project
+  %li{active_when(tab == "builds")}=   link_to "Builds",   project
+  %li{active_when(tab == "stats")}=    link_to "Builds",   project
+  %li{active_when(tab == "tracker")}=  link_to "Tracker",  project

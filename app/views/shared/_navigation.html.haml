@@ -1,0 +1,16 @@
+%ul.nav.secondary-nav{data("dropdown")}
+
+  %li.dropdown
+
+    = link_to "Projects", projects_path, :class => "dropdown-toggle"
+
+    %ul.dropdown-menu
+
+      - projects.each do |project|
+
+        %li.project_nav{:id => "project_nav_#{project.to_param}"}
+
+          = link_to project.name, project
+
+      %li.divider
+      %li= link_to "New project", new_project_path

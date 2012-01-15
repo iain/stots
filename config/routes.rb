@@ -5,6 +5,7 @@ Stots::Application.routes.draw do
   resources :projects do
 
     get "rspec" => "rspec#show"
+    get "cucumber" => "cucumber#show"
 
   end
 

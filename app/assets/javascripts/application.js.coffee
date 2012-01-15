@@ -15,3 +15,4 @@
 # Custom:
 #
 #= require renders_charts
+#= require activate_navigation

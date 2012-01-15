@@ -6,7 +6,7 @@ module Charts
       series = [ "Coverage", "Errors", "Builds" ].map { |t|
         data = (1..28).map { |day|
           if rand < 0.5
-            [ Time.utc(2012, 1, day).to_i * 1000, rand(80) + 20.0 ]
+            [ day.days.ago.to_i * 1000, rand(80) + 20.0 ]
           end
         }.compact
         { :name => t, :data => data }
@@ -17,6 +17,10 @@ module Charts
           :type => 'spline',
           :zoomType => 'x'
         },
+        :credits => {
+          :enabled => false
+        },
+        :plotOptions => { :series => { :animation => { :duration => 100, :easing => :linear } } },
         :title => {
           :text => "Overview"
         },
