@@ -4,13 +4,10 @@
   %iframe#rspec-frame{:src => @project.rspec_url}
 - else
 
-  .alert-message.warning.fade.in{:data => { :alert => "alert" } }
+  .alert-message.warning.fade.in{data("alert")}
     = link_to "×", "#", :class => "close"
     %p You haven't specified an RSpec URL yet
 
   = simple_form_for @project, :wrapper => :inline do |f|
-    = f.input :rspec_url, :type => :url, :required => true, :placeholder => "https://...", :hint => "Probably: https://www.intranet.finalist.com/hudson/job/JOB_NAME/ws/rspec.html", :input_html => { :class => "span12" }
-    .actions
-      = f.submit :class => "btn primary"
-      %button.btn{:type => "reset"} Cancel
-
+    = f.input :rspec_url, :required => true
+    = render "shared/actions", :f => f

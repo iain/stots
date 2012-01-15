@@ -1,0 +1,9 @@
+- if flash[:notice]
+  .alert-message.success.fade.in{data("alert")}
+    = link_to "×", "#", :class => "close"
+    %p= flash[:notice]
+
+- if flash[:alert]
+  .alert-message.error.fade.in{data("alert")}
+    = link_to "×", "#", :class => "close"
+    %p= flash[:alert]

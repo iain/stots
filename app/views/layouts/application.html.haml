@@ -2,6 +2,8 @@
 %html
   %head
     %title Stots
+    %meta{:charset => "UTF-8"}
+    = favicon_link_tag "favicon.png"
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -12,5 +14,6 @@
           = link_to "Stots", root_path, :class => "brand"
           = render "shared/navigation"
     #main.container
-      %div{:data => { "pjax-container" => "true" } }
+      = render "shared/messages"
+      %div{data("pjax-container")}
         = yield

@@ -9,7 +9,5 @@
     %p You haven't specified a Cucumber URL yet
 
   = simple_form_for @project, :wrapper => :inline do |f|
-    = f.input :cucumber_url, :type => :url, :required => true, :placeholder => "https://...", :hint => "Probably: https://www.intranet.finalist.com/hudson/job/JOB_NAME/ws/cucumber.html", :input_html => { :class => "span12" }
-    .actions
-      = f.submit :class => "btn primary"
-      %button.btn{:type => "reset"} Cancel
+    = f.input :cucumber_url, :required => true
+    = render "shared/actions", :f => f

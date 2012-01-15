@@ -1,0 +1,15 @@
+= render "header", :project => @project, :tab => "edit"
+
+= simple_form_for @project, :wrapper => :inline do |f|
+  %fieldset
+    %legend Basic
+    = f.input :name
+
+  %fieldset
+    %legend Integrations
+    = f.input :rspec_url
+    = f.input :cucumber_url
+
+  = render "shared/actions", :f => f
+
+.well= link_to "Delete Project", project_path(@project), :method => :delete, :class => "btn danger", :confirm => "Damn, girl! Are you sure?"

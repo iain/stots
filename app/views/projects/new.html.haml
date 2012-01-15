@@ -1,0 +1,10 @@
+:javascript
+  activateNavigation("new");
+
+%h1.well New Project
+
+= simple_form_for @project, :wrapper => :inline do |f|
+
+  = f.input :name, :autofocus => true
+
+  = render "shared/actions", :f => f
