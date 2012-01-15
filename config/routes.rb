@@ -6,6 +6,7 @@ Stots::Application.routes.draw do
 
     get "rspec" => "rspec#show"
     get "cucumber" => "cucumber#show"
+    get "coverage" => "coverage#show"
 
   end
 

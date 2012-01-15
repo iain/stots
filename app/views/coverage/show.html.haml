@@ -1,0 +1,13 @@
+= render "projects/header", :project => @project, :tab => "coverage"
+
+- if @project.coverage_url?
+  %iframe#coverage-frame{:src => @project.coverage_url}
+- else
+
+  .alert-message.warning.fade.in{data("alert")}
+    = link_to "×", "#", :class => "close"
+    %p You haven't specified a Coverage URL yet
+
+  = simple_form_for @project, :wrapper => :inline do |f|
+    = f.input :coverage_url, :required => true
+    = render "shared/actions", :f => f

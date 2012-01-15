@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120115181329) do
+ActiveRecord::Schema.define(:version => 20120115230959) do
 
   create_table "projects", :force => true do |t|
     t.string   "project"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120115181329) do
     t.datetime "updated_at",   :null => false
     t.string   "rspec_url"
     t.string   "cucumber_url"
+    t.string   "coverage_url"
   end
 
   add_index "projects", ["slug"], :name => "index_projects_on_slug"
