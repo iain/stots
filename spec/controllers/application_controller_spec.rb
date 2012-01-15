@@ -5,7 +5,7 @@ describe ApplicationController do
   describe "#projects" do
 
     it "gets all projects" do
-      Project.should_receive(:all)
+      Project.should_receive(:list)
       controller.projects
     end
 

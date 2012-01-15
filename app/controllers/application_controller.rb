@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def projects
-    @projects ||= Project.all
+    @projects ||= Project.list
   end
   helper_method :projects
 
