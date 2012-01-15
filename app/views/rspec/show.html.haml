@@ -1,0 +1,16 @@
+= render "projects/header", :project => @project, :tab => "rspec"
+
+- if @project.rspec_url?
+  %iframe#rspec-frame{:src => @project.rspec_url}
+- else
+
+  .alert-message.warning.fade.in{:data => { :alert => "alert" } }
+    = link_to "×", "#", :class => "close"
+    %p You haven't specified an RSpec URL yet
+
+  = simple_form_for @project, :wrapper => :inline do |f|
+    = f.input :rspec_url, :type => :url
+    .actions
+      = f.submit :class => "btn primary"
+      %button.btn{:type => "reset"} Cancel
+

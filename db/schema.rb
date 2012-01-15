@@ -11,14 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120115162215) do
+ActiveRecord::Schema.define(:version => 20120115181329) do
 
   create_table "projects", :force => true do |t|
     t.string   "project"
     t.string   "name"
     t.string   "slug"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "rspec_url"
+    t.string   "cucumber_url"
   end
 
   add_index "projects", ["slug"], :name => "index_projects_on_slug"

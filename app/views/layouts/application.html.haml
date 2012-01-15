@@ -10,8 +10,13 @@
       .topbar-inner
         .container
           = link_to "Stots", root_path, :class => "brand"
-          %ul.nav
-            - projects.each do |project|
-              %li{content_for(:project) == project.to_param ? { :class => "active" } : {}  }= link_to project.name, project
+          %ul.nav.secondary-nav{:data => { :dropdown => "dropdown" } }
+            %li.dropdown
+              = link_to "Projects", projects_path, :class => "dropdown-toggle"
+              %ul.dropdown-menu
+                - projects.each do |project|
+                  %li{content_for(:project) == project.to_param ? { :class => "active" } : {}  }= link_to project.name, project
+                %li.divider
+                %li= link_to "New project", new_project_path
     #main.container
       = yield

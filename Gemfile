@@ -7,6 +7,7 @@ gem 'sqlite3'
 
 gem 'haml'
 gem 'friendly_id'
+gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 
 group :assets do
   gem 'compass', '~> 0.12.alpha.4'

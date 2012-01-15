@@ -1,18 +1,3 @@
-- provide :project, @project.to_param
-
-%h1.well
-  = @project.name
-  %small= @project.slug
-
-%ul.tabs
-  %li.active= link_to "Overview", "#"
-  %li= link_to "Coverage"
-  %li= link_to "Commits"
-  %li= link_to "Errors"
-  %li= link_to "Builds"
-  %li= link_to "Stats"
-  %li= link_to "Tracker"
-  %li= link_to "RSpec"
-  %li= link_to "Cucumber"
+= render "header", :project => @project, :tab => "overview"
 
 #foobar{:data => { :chart => project_path(@project, :format => :json) }}

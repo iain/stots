@@ -11,4 +11,11 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def update
+    @project = Project.find(params[:id])
+    @project.update_attributes(params[:project])
+    redirect_to :back
+  end
+
+
 end
