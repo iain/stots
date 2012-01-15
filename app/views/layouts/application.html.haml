@@ -12,6 +12,6 @@
           = link_to "Stots", root_path, :class => "brand"
           %ul.nav
             - projects.each do |project|
-              %li= link_to project.name, project
+              %li{content_for(:project) == project.to_param ? { :class => "active" } : {}  }= link_to project.name, project
     #main.container
       = yield
