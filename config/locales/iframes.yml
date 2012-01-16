@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      iframe:
+        one: iFrame
+        other: iFrames
+    attributes:
+      iframe:
+        url: URL

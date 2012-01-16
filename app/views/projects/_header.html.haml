@@ -7,12 +7,6 @@
 
 %ul.tabs
   %li{active_when(tab == "overview")}= link_to "Overview", project
-  %li{active_when(tab == "rspec")}=    link_to "RSpec",    project_rspec_path(project)
-  %li{active_when(tab == "cucumber")}= link_to "Cucumber", project_cucumber_path(project)
-  %li{active_when(tab == "coverage")}= link_to "Coverage", project_coverage_path(project)
-  %li{active_when(tab == "commits")}=  link_to "Commits",  project
-  %li{active_when(tab == "errors")}=   link_to "Errors",   project
-  %li{active_when(tab == "builds")}=   link_to "Builds",   project
-  %li{active_when(tab == "stats")}=    link_to "Builds",   project
-  %li{active_when(tab == "tracker")}=  link_to "Tracker",  project
+  - project.iframes.list.each do |iframe|
+    %li{active_when(tab == iframe.to_param)}= link_to iframe.name, [ project, iframe ]
   %li{active_when(tab == "edit")}=     link_to "Edit",     edit_project_path(project)

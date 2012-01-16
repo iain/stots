@@ -7,10 +7,14 @@
 
   %fieldset
     %legend iFrames Galore!
-    = f.input :rspec_url
-    = f.input :cucumber_url
-    = f.input :coverage_url
+    %ul.iframes
+      - @project.iframes.list.each do |iframe|
+        %li
+          = link_to iframe.name, [ :edit, @project, iframe ]
+          (#{iframe.url.truncate(100)})
+      %li.new= link_to "new iframe", new_project_iframe_path(@project)
 
   = render "shared/actions", :f => f
 
-.well= link_to "Delete Project", project_path(@project), :method => :delete, :class => "btn danger", :confirm => "Damn, girl! Are you sure?"
+.well
+  = link_to "Delete Project", project_path(@project), :method => :delete, :class => "btn danger", :confirm => "Damn, girl! Are you sure?"

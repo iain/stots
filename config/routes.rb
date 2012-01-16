@@ -4,9 +4,7 @@ Stots::Application.routes.draw do
 
   resources :projects do
 
-    get "rspec" => "rspec#show"
-    get "cucumber" => "cucumber#show"
-    get "coverage" => "coverage#show"
+    resources :iframes
 
   end
 
