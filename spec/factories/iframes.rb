@@ -5,5 +5,6 @@ FactoryGirl.define do
     name "MyString"
     slug "MyString"
     url "MyString"
+    project_id 1
   end
 end

@@ -5,6 +5,7 @@ Stots::Application.routes.draw do
   resources :projects do
 
     resources :iframes
+    get "/chart/:id" => "charts#show", :as => :chart
 
   end
 

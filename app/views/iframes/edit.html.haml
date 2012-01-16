@@ -3,3 +3,6 @@
 %h2 Edit iFrame
 
 = render "form"
+
+.well
+  = link_to "Delete iFrame", project_iframe_path(@project, @iframe), :method => :delete, :class => "btn danger", :confirm => "Damn, girl! Are you sure?"
