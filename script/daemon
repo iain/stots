@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+threads = []
+
+threads << Thread.new do
+  loop do
+    puts "Running airbrake error fetcher"
+    `touch log/airbrake.log`
+    success = `ruby script/airbrake_errors.rb >> log/airbrake.log`
+    if success
+      puts "Airbrake error fetcher went OK"
+      sleep 1
+    else
+      puts "Airbrake error fetcher failed"
+      sleep 100
+    end
+  end
+end
+
+threads << Thread.new do
+  loop do
+    puts "Running airbrake project fetcher"
+    `touch log/airbrake.log`
+    success = `ruby script/airbrake_projects.rb >> log/airbrake.log`
+    if success
+      puts "Airbrake projects fetcher went OK"
+      sleep 10
+    else
+      puts "Airbrake projects fetcher failed"
+      sleep 100
+    end
+  end
+end
+
+threads.map(&:join)

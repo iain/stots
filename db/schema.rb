@@ -11,7 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120115232627) do
+ActiveRecord::Schema.define(:version => 20120116165047) do
+
+  create_table "airbrake_errors", :force => true do |t|
+    t.integer  "airbrake_project_id",                    :null => false
+    t.integer  "group_id",                               :null => false
+    t.integer  "notice_id",                              :null => false
+    t.text     "error_message"
+    t.boolean  "resolved",            :default => false
+    t.datetime "occurred_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "airbrake_errors", ["airbrake_project_id"], :name => "index_airbrake_errors_on_airbrake_project_id"
+  add_index "airbrake_errors", ["group_id"], :name => "index_airbrake_errors_on_group_id"
+  add_index "airbrake_errors", ["notice_id"], :name => "index_airbrake_errors_on_notice_id"
+
+  create_table "airbrake_projects", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "name"
+    t.integer  "airbrake_id"
+    t.string   "api_key"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "iframes", :force => true do |t|
     t.string   "name"

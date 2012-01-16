@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe Project do
 
-  it { should have_many(:iframes) }
+  it { should have_many :iframes }
+  it { should have_one :airbrake_project }
 
-  it { should validate_presence_of(:name) }
+  it { should validate_presence_of :name }
 
   specify do
     create :project

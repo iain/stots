@@ -1,0 +1,10 @@
+= render "projects/header", :project => @project, :tab => "errors"
+
+#foozing{data("chart", project_chart_path(@project, :errors))}
+
+%table.zebra-striped
+  %tbody
+    - @airbrake_errors.order(:occurred_at).reverse_order.each do |error|
+      %tr
+        %td.ellipsis= error.error_message
+        %td.nowrap= I18n.l error.occurred_at

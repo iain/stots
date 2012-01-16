@@ -11,6 +11,11 @@ gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'pjax_rails'
 gem 'inherited_resources'
 
+gem 'faraday'
+gem 'faraday_middleware'
+gem 'typhoeus'
+gem 'nokogiri'
+
 group :assets do
   gem 'compass', '~> 0.12.alpha.4'
   gem 'sass-rails'

@@ -12,4 +12,6 @@ class Project < ActiveRecord::Base
     order(:name)
   end
 
+  include Airbrake::ForProject
+
 end

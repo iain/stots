@@ -14,6 +14,10 @@
           (#{iframe.url.truncate(100)})
       %li.new= link_to "new iframe", new_project_iframe_path(@project)
 
+  %fieldset
+    %legend Airbrake
+    = f.input :airbrake_project_id, :collection => Airbrake::Project.all
+
   = render "shared/actions", :f => f
 
 .well

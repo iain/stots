@@ -1,0 +1,65 @@
+URL = "https://finalist.airbrake.io"
+KEY = ENV["AIRBRAKE_KEY"]
+STOTS = "http://localhost:3000"
+
+require 'faraday'
+require 'faraday_middleware'
+require 'typhoeus'
+require 'nokogiri'
+require 'time'
+
+starting_time = Time.now
+
+def puts(message)
+  STDOUT.puts("[#{Time.now}] #{message}")
+end
+
+$connection = Faraday.new(:url => URL) do |builder|
+  builder.use Faraday::Response::RaiseError
+  builder.adapter :typhoeus
+end
+
+$local_connection = Faraday.new(:url => STOTS) do |builder|
+  builder.use Faraday::Request::UrlEncoded
+  builder.use Faraday::Response::RaiseError
+  builder.adapter :typhoeus
+end
+
+puts "Getting project listing from Airbrake"
+
+
+$connection.in_parallel(Typhoeus::Hydra.hydra) do
+  $local_connection.in_parallel(Typhoeus::Hydra.hydra) do
+    response = $connection.get do |request|
+      request.url "/data_api/v1/projects.xml"
+      request.params[:auth_token] = KEY
+    end
+
+    response.on_complete do
+
+      puts "Got projects from Airbrake"
+
+      doc = Nokogiri::XML(response.body)
+      doc.search("//projects/project").each do |project|
+        data = {
+          :id => project.search("id").first.content,
+          :name => project.search("name").first.content,
+          :api_key => project.search("api-key").first.content
+        }
+
+        local_response = $local_connection.post do |request|
+          request.url "/airbrake/projects"
+          request.body = { :project => data }
+        end
+
+        local_response.on_complete do
+          puts "Saved project #{data[:name]}"
+        end
+
+      end
+
+    end
+  end
+end
+
+puts "Done. It took me %.03f seconds" % (Time.now - starting_time)

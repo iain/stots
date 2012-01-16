@@ -14,6 +14,6 @@
     - projects.each do |project|
       %tr[project]
         %td= link_to project.name, project
-        %td 1
-        %td 1
-        %td 1
+        %td= project.airbrake_errors.count
+        %td -
+        %td -
