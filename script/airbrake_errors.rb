@@ -67,8 +67,11 @@ def get_errors(page = 1)
           :project_id => group.search("project-id").first.content,
           :error_message => group.search("error-message").first.content,
           :notices => Nokogiri::XML(res.body).search("//notices/notice").map { |notice|
-          { :id => notice.search("id").first.content, :created_at => notice.search("created-at").first.content }
-        }
+            {
+              :id => notice.search("id").first.content,
+              :created_at => notice.search("created-at").first.content
+            }
+          }
         }
 
         local_response = $local_connection.post do |request|

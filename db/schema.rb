@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120116165047) do
+ActiveRecord::Schema.define(:version => 20120117184312) do
+
+  create_table "airbrake_deploys", :force => true do |t|
+    t.integer  "airbrake_project_id"
+    t.integer  "airbrake_id"
+    t.string   "rails_env"
+    t.string   "revision"
+    t.string   "local_username"
+    t.datetime "deployed_at"
+    t.datetime "ends_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "airbrake_deploys", ["airbrake_project_id"], :name => "index_airbrake_deploys_on_airbrake_project_id"
 
   create_table "airbrake_errors", :force => true do |t|
     t.integer  "airbrake_project_id",                    :null => false

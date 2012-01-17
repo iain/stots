@@ -5,7 +5,7 @@ module Charts
     def self.[](project)
       query = project.airbrake_errors.group("date").select("COUNT(airbrake_errors.id) AS count, DATE(airbrake_errors.occurred_at) AS date")
       series = { false => "Unresolved", true => "Resolved" }.map do |v, name|
-        data = query.where(:resolved => v).map { |x| [ Time.parse(x[:date]).to_i * 1000, x[:count] ] }
+        data = query.where(:resolved => v).map { |x| [ js_timestamp(Time.parse(x[:date])), x[:count] ] }
         { :name => name, :data => data, :pointInterval => 24 * 3600 * 1000 }
       end
       {
@@ -30,8 +30,9 @@ module Charts
           :maxZoom => 24 * 3600000,
           :tickWidth => 1,
           :lineWitdh => 1,
-          :max => 1.day.from_now.to_i * 1000,
-          :minorTickInterval => 'auto'
+          :max => js_timestamp(1.day.from_now),
+          :minorTickInterval => 'auto',
+          :plotBands => plotbands(project)
         },
         :yAxis => {
           :title => { :text => "Amount" },
@@ -41,6 +42,20 @@ module Charts
         },
         :series => series
       }
+    end
+
+    def self.plotbands(project)
+      project.airbrake_deploys.map do |deploy|
+        {
+          :from => js_timestamp(deploy.deployed_at - 5.hours),
+          :to => js_timestamp(deploy.deployed_at + 5.hours),
+          :color => 'rgba(40, 210, 40, 0.5)'
+        }
+      end.tap { |x| Rails.logger.debug x.inspect }
+    end
+
+    def self.js_timestamp(time)
+      time.to_time.to_i * 1000
     end
 
   end

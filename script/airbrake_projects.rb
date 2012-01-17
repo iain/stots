@@ -41,19 +41,43 @@ $connection.in_parallel(Typhoeus::Hydra.hydra) do
 
       doc = Nokogiri::XML(response.body)
       doc.search("//projects/project").each do |project|
-        data = {
-          :id => project.search("id").first.content,
-          :name => project.search("name").first.content,
-          :api_key => project.search("api-key").first.content
-        }
 
-        local_response = $local_connection.post do |request|
-          request.url "/airbrake/projects"
-          request.body = { :project => data }
+        id = project.search("id").first.content
+
+        deploys = $connection.get do |req|
+          req.url "/projects/#{id}/deploys.xml"
+          req.params[:auth_token] = KEY
         end
 
-        local_response.on_complete do
-          puts "Saved project #{data[:name]}"
+        deploys.on_complete do
+
+          puts "Got deploys for project #{id}"
+
+          data = {
+            :id => id,
+            :name => project.search("name").first.content,
+            :api_key => project.search("api-key").first.content,
+            :deploys => Nokogiri::XML(deploys.body).search("//projects/deploy").map { |deploy|
+              {
+                :id => deploy.search("id").first.content,
+                :rails_env => deploy.search("rails-env").first.content,
+                :revision => deploy.search("scm-revision").first.content,
+                :local_username => deploy.search("local-username").first.content,
+                :created_at => deploy.search("created-at").first.content,
+                :ends_at => deploy.search("ends-at").first.content
+              }
+            }
+          }
+
+          local_response = $local_connection.post do |request|
+            request.url "/airbrake/projects"
+            request.body = { :project => data }
+          end
+
+          local_response.on_complete do
+            puts "Saved project #{data[:name]}"
+          end
+
         end
 
       end
