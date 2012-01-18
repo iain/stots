@@ -3,10 +3,6 @@ class Settings
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  def self.fields
-    Setting.all.map { |setting| "#{setting.group}_#{setting.key}" }
-  end
-
   def self.new(*)
     attr_accessor *Setting.all.map(&:reader_name)
     super
