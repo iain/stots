@@ -1,8 +1,12 @@
-%ul.nav.secondary-nav{data("dropdown")}
+%ul.nav.pull-right
+
+  %li= link_to "Settings", "#"
+
+  %li.vertical-divider
 
   %li.dropdown.project_nav#project_nav_index
 
-    = link_to "Projects", projects_path, :class => "dropdown-toggle"
+    = link_to "Projects #{caret}".html_safe, "#", :class => "dropdown-toggle", :data => { :toggle => "dropdown" }
 
     %ul.dropdown-menu
 

@@ -8,8 +8,8 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    %header.topbar
-      .topbar-inner
+    %header.navbar.navbar-fixed
+      .navbar-inner
         .container
           = link_to "Stots", root_path, :class => "brand"
           = render "shared/navigation"

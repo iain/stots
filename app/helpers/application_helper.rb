@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def caret
+    content_tag(:b, "", :class => "caret")
+  end
+
   def data(type, value=nil)
     { :data => { type => (value || type) } }
   end

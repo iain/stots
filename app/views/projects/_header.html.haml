@@ -5,7 +5,7 @@
   = project.name
   %small= project.slug
 
-%ul.tabs
+%ul.nav.tabs
   %li{active_when(tab == "overview")}= link_to "Overview", project
 
   %li{active_when(tab == "errors")}= link_to "Errors", project_errors_path(project)

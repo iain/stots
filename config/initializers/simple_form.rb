@@ -5,7 +5,7 @@ SimpleForm.setup do |config|
   # wrapper, change the order or even add your own to the
   # stack. The options given below are used to wrap the
   # whole input.
-  config.wrappers :class => :input, :hint_class => :field_with_hint, :error_class => :field_with_errors do |b|
+  config.wrappers :tag => "fieldset", :class => "control-group", :hint_class => :field_with_hint, :error_class => 'error' do |b|
     ## Extensions enabled by default
     # Any of these extensions can be disabled for a
     # given input by passing: `f.input EXTENSION_NAME => false`.
@@ -27,74 +27,23 @@ SimpleForm.setup do |config|
     # extensions by default, you can change `b.optional` to `b.use`.
 
     # Calculates maxlength from length validations for string inputs
-    b.optional :maxlength
+    b.use :maxlength
 
     # Calculates pattern from format validations for string inputs
-    b.optional :pattern
+    b.use :pattern
 
     # Calculates min and max from length validations for numeric inputs
-    b.optional :min_max
+    b.use :min_max
 
     # Calculates readonly automatically from readonly attributes
-    b.optional :readonly
+    b.use :readonly
 
     ## Inputs
-    b.use :label_input
-    b.use :hint,  :tag => :span, :class => :hint
-    b.use :error, :tag => :span, :class => :error
-  end
-
-  config.wrappers :inline, :class => 'clearfix', :error_class => :error do |b|
-    b.use :html5
-    b.use :maxlength
-    b.use :min_max
-    b.use :readonly
-    b.use :pattern
-    b.use :placeholder
-    b.use :label
-    b.use :tag => 'div', :class => 'input' do |ba|
+    b.use :label, :class => "control-label"
+    b.use :tag => 'div', :class => 'controls' do |ba|
       ba.use :input
-      ba.use :error, :tag => :span, :class => :'help-inline'
-      ba.use :hint,  :tag => :span, :class => :'help-block'
-    end
-  end
-
-  config.wrappers :stacked, :class => "clearfix", :error_class => :error do |b|
-    b.use :html5
-    b.use :maxlength
-    b.use :min_max
-    b.use :readonly
-    b.use :pattern
-    b.use :placeholder
-    b.use :label
-    b.use :hint,  :tag => :span, :class => :'help-block'
-    b.use :tag => 'div', :class => 'input' do |input|
-      input.use :input
-      input.use :error, :tag => :span, :class => :'help-inline'
-    end
-  end
-
-  config.wrappers :prepend, :class => "clearfix", :error_class => :error do |b|
-    b.use :placeholder
-    b.use :label
-    b.use :hint,  :tag => :span, :class => :'help-block'
-    b.use :tag => 'div', :class => 'input' do |input|
-      input.use :tag => 'div', :class => 'input-prepend' do |prepend|
-        prepend.use :input
-      end
-      input.use :error, :tag => :span, :class => :'help-inline'
-    end
-  end
-
-  config.wrappers :append, :class => "clearfix", :error_class => :error do |b|
-    b.use :placeholder
-    b.use :label
-    b.use :hint,  :tag => :span, :class => :'help-block'
-    b.use :tag => 'div', :class => 'input' do |input|
-      input.use :tag => 'div', :class => 'input-append' do |append|
-        append.use :input
-      end
-      input.use :error, :tag => :span, :class => :'help-inline'
+      ba.use :error, :tag => :span, :class => 'help-inline'
+      ba.use :hint,  :tag => :p, :class => 'help-block'
     end
   end
 
@@ -132,7 +81,7 @@ SimpleForm.setup do |config|
   # config.label_class = nil
 
   # You can define the class to use on all forms. Default is simple_form.
-  # config.form_class = :simple_form
+  config.form_class = :'form-horizontal'
 
   # Whether attributes are required by default (or not). Default is true.
   # config.required_by_default = true

@@ -1,22 +1,20 @@
 = render "header", :project => @project, :tab => "edit"
 
-= simple_form_for @project, :wrapper => :inline do |f|
-  %fieldset
-    %legend Basic
-    = f.input :name
+= simple_form_for @project do |f|
 
-  %fieldset
-    %legend iFrames Galore!
-    %ul.iframes
-      - @project.iframes.list.each do |iframe|
-        %li
-          = link_to iframe.name, [ :edit, @project, iframe ]
-          (#{iframe.url.truncate(100)})
-      %li.new= link_to "new iframe", new_project_iframe_path(@project)
+  %legend Basic
+  = f.input :name
 
-  %fieldset
-    %legend Airbrake
-    = f.input :airbrake_project_id, :collection => Airbrake::Project.all
+  %legend iFrames Galore!
+  %ul.iframes
+    - @project.iframes.list.each do |iframe|
+      %li
+        = link_to iframe.name, [ :edit, @project, iframe ]
+        (#{iframe.url.truncate(100)})
+    %li.new= link_to "new iframe", new_project_iframe_path(@project)
+
+  %legend Airbrake
+  = f.input :airbrake_project_id, :collection => Airbrake::Project.all
 
   = render "shared/actions", :f => f
 

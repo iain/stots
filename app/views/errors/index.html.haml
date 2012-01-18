@@ -2,9 +2,13 @@
 
 #foozing{data("chart", project_chart_path(@project, :errors))}
 
-%table.zebra-striped
+%table.table.table-striped.errors
+  %thead
+    %tr
+      %th Message
+      %th Date
   %tbody
     - @airbrake_errors.order(:occurred_at).reverse_order.each do |error|
       %tr
         %td.ellipsis= error.error_message
-        %td.nowrap= I18n.l error.occurred_at
+        %td.date= I18n.l error.occurred_at

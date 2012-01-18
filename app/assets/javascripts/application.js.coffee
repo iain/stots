@@ -4,12 +4,23 @@
 #= require jquery.livequery
 #= require jquery_ujs
 #= require highcharts
-#= require bootstrap-alerts
-#= require bootstrap-dropdown
-#= require bootstrap-tabs
-#= require bootstrap-twipsy
-#= require bootstrap-popover
 #= require pjax
+#
+#
+# Bootstrap:
+#
+#= require bootstrap-transition
+#= require bootstrap-alert
+#= require bootstrap-modal
+#= require bootstrap-dropdown
+#= require bootstrap-scrollspy
+#= require bootstrap-tab
+#= require bootstrap-tooltip
+#= require bootstrap-popover
+#= require bootstrap-button
+#= require bootstrap-collapse
+#= require bootstrap-carousel
+#= require bootstrap-typeahead
 #
 #
 # Custom:
