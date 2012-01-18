@@ -1,0 +1,14 @@
+en:
+  activemodel:
+    attributes:
+      settings:
+        airbrake_api_key: "API Key"
+        airbrake_account_url: "Account URL"
+  simple_form:
+    hints:
+      settings:
+        airbrake_api_key: "Log into Airbrake to get your API key"
+        airbrake_account_url: "Don't forget 'https' is you have SSL enabled in your account."
+    placeholders:
+      settings:
+        airbrake_account_url: "https://your_account.airbrake.io"

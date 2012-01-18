@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120117184312) do
+ActiveRecord::Schema.define(:version => 20120118185849) do
 
   create_table "airbrake_deploys", :force => true do |t|
     t.integer  "airbrake_project_id"
@@ -72,5 +72,16 @@ ActiveRecord::Schema.define(:version => 20120117184312) do
   end
 
   add_index "projects", ["slug"], :name => "index_projects_on_slug"
+
+  create_table "settings", :force => true do |t|
+    t.string   "key"
+    t.string   "group"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "settings", ["group"], :name => "index_settings_on_group"
+  add_index "settings", ["key"], :name => "index_settings_on_key"
 
 end

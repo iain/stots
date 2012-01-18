@@ -1,0 +1,13 @@
+:javascript
+  activateNavigation("settings");
+
+%h1.well Settings
+
+= simple_form_for @settings, :url => settings_path do |f|
+
+  - @settings.each do |group|
+    %legend= Settings.human_attribute_name group.name
+    - group.each do |id, name|
+      = f.input id, :input_html => { :name => name }
+
+  = render "shared/actions", :f => f

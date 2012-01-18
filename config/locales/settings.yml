@@ -1,0 +1,11 @@
+en:
+  activemodel:
+    attributes:
+      settings:
+        global_site_url: Site URL
+        global: Global Settings
+
+  simple_form:
+    hints:
+      settings:
+        global_site_url: The root URL of this site, needed for daemons to store their data.

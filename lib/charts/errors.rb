@@ -51,7 +51,7 @@ module Charts
           :to => js_timestamp(deploy.deployed_at + 5.hours),
           :color => 'rgba(40, 210, 40, 0.5)'
         }
-      end.tap { |x| Rails.logger.debug x.inspect }
+      end
     end
 
     def self.js_timestamp(time)

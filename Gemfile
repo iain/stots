@@ -32,3 +32,8 @@ end
 group :test do
   gem 'shoulda-matchers'
 end
+
+group :development, :production do
+  gem 'hirb', :require => false
+  gem 'wirb', :require => false
+end

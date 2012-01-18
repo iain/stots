@@ -2,6 +2,9 @@ Stots::Application.routes.draw do
 
   root :to => "projects#index"
 
+  get "/settings" => "settings#edit"
+  put "/settings" => "settings#update"
+
   resources :projects do
 
     resources :iframes, :except => [ :index ]
