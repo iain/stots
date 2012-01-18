@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Airbrake::Error do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it { should validate_presence_of :airbrake_project_id }
+  it { should validate_presence_of :group_id }
+  it { should validate_presence_of :notice_id }
+
 end
