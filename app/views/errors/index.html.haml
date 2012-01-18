@@ -8,7 +8,10 @@
       %th Message
       %th Date
   %tbody
-    - @airbrake_errors.order(:occurred_at).reverse_order.each do |error|
+    - @airbrake_errors.each do |error|
       %tr
-        %td.ellipsis= error.error_message
+        %td.message
+          .ellipsis= error.error_message
         %td.date= I18n.l error.occurred_at
+
+= render "shared/pager", :collection => @airbrake_errors

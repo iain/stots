@@ -10,6 +10,8 @@ gem 'friendly_id'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'pjax_rails'
 gem 'inherited_resources'
+gem 'will_paginate'
+gem 'has_scope'
 
 gem 'faraday'
 gem 'faraday_middleware'

@@ -1,0 +1,7 @@
+%ul.pager
+
+  - if collection.previous_page
+    %li= link_to "← Previous Page", { :page => collection.previous_page }
+
+  - if collection.next_page
+    %li= link_to "Next Page →", { :page => collection.next_page }

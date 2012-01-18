@@ -15,9 +15,15 @@ iframe
   .new
     list-style-type: circle
 
-.ellipsis
-  text-overflow: ellipsis
+.table.errors
+  .date
+    white-space: nowrap
+    text-align: right
+  .message
+    .ellipsis
+      width: 980px
 
-.table.errors .date
+.ellipsis
   white-space: nowrap
-  text-align: right
+  overflow: hidden
+  text-overflow: ellipsis
