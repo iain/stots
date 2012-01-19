@@ -2,7 +2,7 @@ class PivotalTracker::Iteration < ActiveRecord::Base
 
   belongs_to :project, :class_name => "PivotalTracker::Project", :foreign_key => "pivotal_id"
 
-  validates_presence_of :project_id, :pivotal_id
+  validates_presence_of :pivotal_id
 
   def self.import(project, data)
     iteration = where(:pivotal_id => data[:id]).first || new(:pivotal_id => data[:id])

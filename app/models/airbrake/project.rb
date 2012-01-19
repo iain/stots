@@ -10,11 +10,15 @@ class Airbrake::Project < ActiveRecord::Base
   end
 
   def self.import(data)
-    project = where(:airbrake_id => data[:id]).first || new(:airbrake_id => data[:id])
-    project.name = data[:name]
-    project.api_key = data[:api_key]
-    project.save!
-    Airbrake::Deploy.import(project, Array(data[:deploys]))
+    transaction do
+      project = where(:airbrake_id => data[:id]).first || new(:airbrake_id => data[:id])
+      project.name = data[:name]
+      project.api_key = data[:api_key]
+      project.save!
+      Array(data[:deploys]).each do |deploy|
+        Airbrake::Deploy.import(project, deploy)
+      end
+    end
   end
 
 end

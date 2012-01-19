@@ -17,6 +17,7 @@ gem 'faraday'
 gem 'faraday_middleware'
 gem 'typhoeus'
 gem 'nokogiri'
+gem 'foreman'
 
 group :assets do
   gem 'compass', '~> 0.12.alpha.4'

@@ -1,5 +1,3 @@
-URL = "https://finalist.airbrake.io"
-KEY = ENV["AIRBRAKE_KEY"]
 STOTS = "http://localhost:3000"
 
 require 'faraday'
@@ -14,14 +12,26 @@ def puts(message)
   STDOUT.puts("[#{Time.now}] #{message}")
 end
 
-$connection = Faraday.new(:url => URL) do |builder|
-#  builder.use Faraday::Response::RaiseError
+$local_connection = Faraday.new(:url => STOTS) do |builder|
+  builder.use Faraday::Request::UrlEncoded
+  builder.use Faraday::Response::RaiseError
   builder.adapter :typhoeus
 end
 
-$local_connection = Faraday.new(:url => STOTS) do |builder|
-  builder.use Faraday::Request::UrlEncoded
-#  builder.use Faraday::Response::RaiseError
+puts "Getting settings from Stots"
+
+response = $local_connection.get do |req|
+  req.url "/settings/airbrake.xml"
+end
+
+response.on_complete do
+  settings = Nokogiri::XML(response.body)
+  KEY = settings.search("//settings/api_key").first.content
+  URL = settings.search("//settings/account_url").first.content
+end
+
+$connection = Faraday.new(:url => URL) do |builder|
+  builder.use Faraday::Response::RaiseError
   builder.adapter :typhoeus
 end
 

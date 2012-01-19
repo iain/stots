@@ -21,6 +21,14 @@ class Setting < ActiveRecord::Base
     group(group).key(key).value
   end
 
+  def self.to_hash
+    Hash[scoped.map(&:to_pairs)]
+  end
+
+  def to_pairs
+    [ key, value ]
+  end
+
   def reader_name
     "#{group}_#{key}"
   end
