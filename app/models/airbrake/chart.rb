@@ -1,11 +1,16 @@
 class Airbrake::Chart
 
   def self.[](project)
-    query = project.airbrake_errors.by_date
-    series = { false => "Unresolved", true => "Resolved" }.map do |v, name|
-      data = query.resolved(v).map { |x| [ js_timestamp(x[:date]), x[:count] ] }
-      { :name => name, :data => data, :pointInterval => 24 * 3600 * 1000 }
-    end
+    new(project).options
+  end
+
+  attr_reader :project
+
+  def initialize(project)
+    @project = project
+  end
+
+  def options
     {
       :chart => {
         :renderTo => 'chart',
@@ -30,7 +35,7 @@ class Airbrake::Chart
         :lineWitdh => 1,
         :max => js_timestamp(1.day.from_now),
         :minorTickInterval => 'auto',
-        :plotBands => plotbands(project)
+        :plotBands => plotbands
       },
       :yAxis => {
         :title => { :text => "Amount" },
@@ -42,7 +47,22 @@ class Airbrake::Chart
     }
   end
 
-  def self.plotbands(project)
+  def series
+    @series ||= { false => "Unresolved", true => "Resolved" }.map do |v, name|
+      data = query.resolved(v).map { |x| [ js_timestamp(x[:date]), x[:count] ] }
+      { :name => name, :data => data, :pointInterval => 24 * 3600 * 1000 }
+    end
+  end
+
+  def query
+    @query ||= project.airbrake_errors.by_date
+  end
+
+  def plotbands
+    deploys
+  end
+
+  def deploys
     project.airbrake_deploys.map do |deploy|
       {
         :from => js_timestamp(deploy.deployed_at - 5.hours),
@@ -52,7 +72,7 @@ class Airbrake::Chart
     end
   end
 
-  def self.js_timestamp(time)
+  def js_timestamp(time)
     time.to_time.to_i * 1000
   end
 
