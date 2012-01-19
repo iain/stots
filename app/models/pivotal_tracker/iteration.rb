@@ -6,7 +6,7 @@ class PivotalTracker::Iteration < ActiveRecord::Base
 
   def self.import(project, data)
     iteration = where(:pivotal_id => data[:id]).first || new(:pivotal_id => data[:id])
-    iteration.project = project
+    iteration.project_id = project.pivotal_id
     iteration.number = data[:number]
     iteration.start = data[:start]
     iteration.finish = data[:finish]

@@ -26,4 +26,12 @@ class PivotalTracker::Project < ActiveRecord::Base
     end
   end
 
+  def self.list
+    order(:name)
+  end
+
+  def to_label
+    "#{name} (#{pivotal_id})"
+  end
+
 end

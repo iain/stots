@@ -31,8 +31,8 @@ class Airbrake::Chart
       :xAxis => {
         :type => 'datetime',
         :maxZoom => 24 * 3600000,
-        :tickWidth => 1,
-        :lineWitdh => 1,
+        :tickWidth => 3,
+        :lineWitdh => 2,
         :max => js_timestamp(1.day.from_now),
         :minorTickInterval => 'auto',
         :plotBands => plotbands
@@ -40,8 +40,8 @@ class Airbrake::Chart
       :yAxis => {
         :title => { :text => "Amount" },
         :min => 0,
-        :tickWidth => 1,
-        :lineWitdh => 1
+        :tickWidth => 3,
+        :lineWitdh => 2
       },
       :series => series
     }
@@ -59,7 +59,26 @@ class Airbrake::Chart
   end
 
   def plotbands
-    deploys
+    deploys + iterations
+  end
+
+  def iterations
+    return [] unless project.respond_to?(:pivotal_tracker_iterations)
+    project.pivotal_tracker_iterations.map do |iteration|
+      {
+        :from => js_timestamp(iteration.start),
+        :to => js_timestamp(iteration.finish),
+        :color => cycle('rgba(100, 100, 210, 0.1)', 'rgba(255, 255, 255, 0.0)'),
+        :label => { :text => "#{iteration.number}" }
+      }
+    end.tap { |x| p "*" * 100; p x }
+  end
+
+  def cycle(*values)
+    @cycle_index ||= 0
+    values[@cycle_index % values.size].tap do
+      @cycle_index += 1
+    end
   end
 
   def deploys

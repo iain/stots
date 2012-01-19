@@ -14,7 +14,10 @@
     %li.new= link_to "new iframe", new_project_iframe_path(@project)
 
   %legend Airbrake
-  = f.input :airbrake_project_id, :collection => Airbrake::Project.all
+  = f.input :airbrake_project_id, :collection => Airbrake::Project.list
+
+  %legend Pivotal Tracker
+  = f.input :pivotal_tracker_project_id, :collection => PivotalTracker::Project.list
 
   = render "shared/actions", :f => f
 

@@ -6,7 +6,7 @@ class PivotalTracker::Activity < ActiveRecord::Base
 
   def self.import(project, data)
     activity = where(:pivotal_id => data[:id]).first || new(:pivotal_id => data[:id])
-    activity.project = project
+    activity.project_id = project.pivotal_id
     activity.event_type = data[:event_type]
     activity.occurred_at = data[:occurred_at]
     activity.author = data[:author]

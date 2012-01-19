@@ -13,5 +13,6 @@ class Project < ActiveRecord::Base
   end
 
   include Airbrake::ForProject
+  include PivotalTracker::ForProject
 
 end

@@ -21,4 +21,8 @@ class Airbrake::Project < ActiveRecord::Base
     end
   end
 
+  def self.list
+    order(:name)
+  end
+
 end
