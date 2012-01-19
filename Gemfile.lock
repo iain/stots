@@ -91,6 +91,7 @@ GEM
     mime-types (1.17.2)
     multi_json (1.0.4)
     multipart-post (1.1.4)
+    mysql2 (0.3.11)
     nokogiri (1.5.0)
     pjax_rails (0.1.10)
       jquery-rails
@@ -144,7 +145,6 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.5)
     term-ansicolor (1.0.7)
     thor (0.14.6)
     tilt (1.3.3)
@@ -176,6 +176,7 @@ DEPENDENCIES
   hirb
   inherited_resources
   jquery-rails
+  mysql2
   nokogiri
   pjax_rails
   rails (= 3.2.0.rc2)
@@ -183,7 +184,6 @@ DEPENDENCIES
   sass-rails
   shoulda-matchers
   simple_form!
-  sqlite3
   typhoeus
   uglifier
   will_paginate

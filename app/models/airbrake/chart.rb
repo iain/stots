@@ -3,7 +3,7 @@ class Airbrake::Chart
   def self.[](project)
     query = project.airbrake_errors.by_date
     series = { false => "Unresolved", true => "Resolved" }.map do |v, name|
-      data = query.resolved(v).map { |x| [ js_timestamp(Time.parse(x[:date])), x[:count] ] }
+      data = query.resolved(v).map { |x| [ js_timestamp(x[:date]), x[:count] ] }
       { :name => name, :data => data, :pointInterval => 24 * 3600 * 1000 }
     end
     {
