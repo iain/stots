@@ -1,0 +1,10 @@
+en:
+  activemodel:
+    attributes:
+      settings:
+        pivotal_tracker_api_key: "API Key"
+        pivotal_tracker: "Pivotal Tracker"
+  simple_form:
+    hints:
+      settings:
+        pivotal_tracker_api_key: "Log into Pivotal Tracker to get your API key"

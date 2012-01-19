@@ -8,7 +8,7 @@ class ErrorsController < InheritedResources::Base
 
 
   def collection
-    @airbrake_errors ||= super.order("occurred_at DESC")
+    @airbrake_errors ||= end_of_association_chain.order("occurred_at DESC")
   end
 
 end

@@ -6,3 +6,6 @@ global.key("site_url").create
 airbrake = Setting.group("airbrake")
 airbrake.key("api_key").create
 airbrake.key("account_url").create
+
+pivotal = Setting.group("pivotal_tracker")
+pivotal.key("api_key").create

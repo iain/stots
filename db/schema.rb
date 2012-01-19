@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120118185849) do
+ActiveRecord::Schema.define(:version => 20120118223847) do
 
   create_table "airbrake_deploys", :force => true do |t|
     t.integer  "airbrake_project_id"
@@ -62,6 +62,51 @@ ActiveRecord::Schema.define(:version => 20120118185849) do
 
   add_index "iframes", ["project_id"], :name => "index_iframes_on_project_id"
   add_index "iframes", ["slug"], :name => "index_iframes_on_slug"
+
+  create_table "pivotal_tracker_activities", :force => true do |t|
+    t.integer  "pivotal_id"
+    t.integer  "project_id"
+    t.string   "event_type"
+    t.datetime "occurred_at"
+    t.string   "author"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "pivotal_tracker_activities", ["pivotal_id"], :name => "index_pivotal_tracker_activities_on_pivotal_id"
+  add_index "pivotal_tracker_activities", ["project_id"], :name => "index_pivotal_tracker_activities_on_project_id"
+
+  create_table "pivotal_tracker_iterations", :force => true do |t|
+    t.integer  "pivotal_id"
+    t.integer  "project_id"
+    t.integer  "number"
+    t.datetime "start"
+    t.datetime "finish"
+    t.float    "team_strength"
+    t.integer  "stories"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "pivotal_tracker_iterations", ["pivotal_id"], :name => "index_pivotal_tracker_iterations_on_pivotal_id"
+  add_index "pivotal_tracker_iterations", ["project_id"], :name => "index_pivotal_tracker_iterations_on_project_id"
+
+  create_table "pivotal_tracker_projects", :force => true do |t|
+    t.string   "name"
+    t.integer  "pivotal_id"
+    t.integer  "project_id"
+    t.integer  "iteration_length"
+    t.string   "week_start_day"
+    t.string   "point_scale"
+    t.integer  "current_velocity"
+    t.integer  "initial_velocity"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "pivotal_tracker_projects", ["pivotal_id"], :name => "index_pivotal_tracker_projects_on_pivotal_id"
+  add_index "pivotal_tracker_projects", ["project_id"], :name => "index_pivotal_tracker_projects_on_project_id"
 
   create_table "projects", :force => true do |t|
     t.string   "project"
