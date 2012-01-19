@@ -1,6 +1,6 @@
 = render "projects/header", :project => @project, :tab => "errors"
 
-#foozing{data("chart", project_chart_path(@project, :errors))}
+#foobar{data(:chart, airbrake_project_chart_path(@project))}
 
 %table.table.table-striped.errors
   %thead

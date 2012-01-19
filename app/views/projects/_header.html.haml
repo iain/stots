@@ -8,7 +8,9 @@
 %ul.nav.tabs
   %li{active_when(tab == "overview")}= link_to "Overview", project
 
-  %li{active_when(tab == "errors")}= link_to "Errors", project_errors_path(project)
+  %li{active_when(tab == "errors")}= link_to "Errors", airbrake_project_errors_path(project)
+
   - project.iframes.list.each do |iframe|
     %li{active_when(tab == iframe.to_param)}= link_to iframe.name, [ project, iframe ]
+
   %li{active_when(tab == "edit")}=     link_to "Edit",     edit_project_path(project)

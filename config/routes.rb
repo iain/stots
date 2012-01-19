@@ -12,7 +12,8 @@ Stots::Application.routes.draw do
   namespace :airbrake do
     post "/errors"   => "errors#create"
     post "/projects" => "projects#create"
-    get  "/chart"    => "charts#show"
+    get  "/projects/:project_id/chart"  => "charts#show",  :as => :project_chart
+    get  "/projects/:project_id/errors" => "errors#index", :as => :project_errors
   end
 
   namespace :pivotal_tracker do

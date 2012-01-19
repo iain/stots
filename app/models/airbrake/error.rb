@@ -14,4 +14,12 @@ class Airbrake::Error < ActiveRecord::Base
     end
   end
 
+  def self.by_date
+    group("date").select("COUNT(airbrake_errors.id) AS count, DATE(airbrake_errors.occurred_at) AS date")
+  end
+
+  def self.resolved(resolved)
+    where(:resolved => resolved)
+  end
+
 end
