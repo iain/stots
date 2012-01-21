@@ -53,9 +53,10 @@ $connection.in_parallel(Typhoeus::Hydra.hydra) do
       end
 
       response.on_complete do
-        puts "Got projects"
+        projects = Nokogiri::XML(response.body).search("//projects/project")
+        puts "Got #{projects.size} projects"
 
-        Nokogiri::XML(response.body).search("//projects/project").each do |project|
+        projects.each do |project|
           id = project.x("id")
           puts "Reading project #{id} - #{project.x("name")}"
 
@@ -72,9 +73,10 @@ $connection.in_parallel(Typhoeus::Hydra.hydra) do
 
           res.on_complete do
 
-            puts "Retrieved activities for project #{id}"
+            adoc = Nokogiri::XML(res.body).search("//activities/activity")
+            puts "Retrieved #{adoc.size} activities for project #{project.x("name")}"
 
-            activities = Nokogiri::XML(res.body).search("//activities/activity").map do |activity|
+            activities = adoc.map do |activity|
 
               { :id => activity.x("id"),
                 :event_type => activity.x("event_type"),
@@ -87,9 +89,10 @@ $connection.in_parallel(Typhoeus::Hydra.hydra) do
 
             res2.on_complete do
 
-              puts "Retrieved iterations for project #{id}"
+              idoc = Nokogiri::XML(res2.body).search("//iterations/iteration")
+              puts "Retrieved #{idoc.size} iterations for project #{project.x("name")}"
 
-              iterations = Nokogiri::XML(res2.body).search("//iterations/iteration").map do |iteration|
+              iterations = idoc.map do |iteration|
                 { :id => iteration.x("id"),
                   :number => iteration.x("number"),
                   :start => iteration.x("start"),

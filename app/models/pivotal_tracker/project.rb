@@ -10,17 +10,17 @@ class PivotalTracker::Project < ActiveRecord::Base
   def self.import(data)
     transaction do
       project = where(:pivotal_id => data[:id]).first || new(:pivotal_id => data[:id])
-      project.name = data[:name]
+      project.name             = data[:name]
       project.iteration_length = data[:iteration_length]
-      project.week_start_day = data[:week_start_day]
-      project.point_scale = data[:point_scale]
+      project.week_start_day   = data[:week_start_day]
+      project.point_scale      = data[:point_scale]
       project.current_velocity = data[:current_velocity]
       project.initial_velocity = data[:initial_velocity]
       project.save!
-      data[:iterations].each do |iteration|
+      Array(data[:iterations]).each do |iteration|
         PivotalTracker::Iteration.import(project, iteration)
       end
-      data[:activities].each do |activity|
+      Array(data[:activities]).each do |activity|
         PivotalTracker::Activity.import(project, activity)
       end
     end
