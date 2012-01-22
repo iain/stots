@@ -71,7 +71,7 @@ class Airbrake::Chart
         :color => cycle('rgba(100, 100, 210, 0.1)', 'rgba(255, 255, 255, 0.0)'),
         :label => { :text => "#{iteration.number}" }
       }
-    end.tap { |x| p "*" * 100; p x }
+    end
   end
 
   def cycle(*values)
