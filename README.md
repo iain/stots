@@ -2,6 +2,8 @@
 
 Stots is a dashboard that combines activity on different services into one nice dashboard.
 
+Current status: Brain fart, experimental stuff and so on.
+
 ## Features
 
 ### Show overviews of activity on different services per project
@@ -28,3 +30,30 @@ ways. Now you can see how one thing influences the other.
 
 New services are coming and going regularly. Stots uses the power of Rails engines to add new
 features and new services in a snap.
+
+
+## Todo
+
+Practically all of the above.
+
+
+## Usage
+
+It's a Rails app, so it shouldn't be too difficult if you've installed one before.
+
+```
+bundle install
+rails server
+```
+
+Go to settings and add your API keys.
+
+When you entered your API keys, you can do:
+
+```
+ruby script/pivotal_tracker.rb
+ruby script/airbrake_projects.rb
+GET_MORE=true ruby script/airbrake_errors.rb
+```
+
+After that, go and add projects in the web interface.
