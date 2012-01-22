@@ -4,6 +4,8 @@ Stots is a dashboard that combines activity on different services into one nice 
 
 Current status: Brain fart, experimental stuff and so on.
 
+![screenshot](https://github.com/iain/stots/raw/master/doc/screenshot.png)
+
 ## Features
 
 ### Show overviews of activity on different services per project
