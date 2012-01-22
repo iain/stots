@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120118223847) do
+ActiveRecord::Schema.define(:version => 20120122124619) do
 
   create_table "airbrake_deploys", :force => true do |t|
     t.integer  "airbrake_project_id"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20120118223847) do
   create_table "airbrake_errors", :force => true do |t|
     t.integer  "airbrake_project_id",                    :null => false
     t.integer  "group_id",                               :null => false
-    t.integer  "notice_id",                              :null => false
+    t.string   "notice_id",           :default => "",    :null => false
     t.text     "error_message"
     t.boolean  "resolved",            :default => false
     t.datetime "occurred_at"

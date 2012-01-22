@@ -73,7 +73,7 @@ def get_errors(page = 1)
 
         data = {
           :id => id,
-          :resolved => group.search("resolved").first.content == "true",
+          :resolved => group.search("resolved").first.content,
           :project_id => group.search("project-id").first.content,
           :error_message => group.search("error-message").first.content,
           :notices => Nokogiri::XML(res.body).search("//notices/notice").map { |notice|

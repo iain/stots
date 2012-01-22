@@ -19,6 +19,8 @@ gem 'typhoeus'
 gem 'nokogiri'
 gem 'foreman'
 
+gem 'thin'
+
 group :assets do
   gem 'compass', '~> 0.12.alpha.4'
   gem 'sass-rails'

@@ -5,11 +5,13 @@
 %table.table.table-striped.errors
   %thead
     %tr
+      %th Resolved
       %th Message
       %th Date
   %tbody
     - @airbrake_errors.each do |error|
       %tr
+        %td.resolved= error.resolved
         %td.message
           .ellipsis= error.error_message
         %td.date= I18n.l error.occurred_at
